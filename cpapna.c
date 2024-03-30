@@ -2,11 +2,12 @@
 
 int main()
 {
-    int r, volume ;
+    double r; 
+    double volume ;
     printf("enter the radius of the circle\n");
-    scanf("%d",&r);
+    scanf("%lf",&r);
     volume=(4/3)*3.14*r*r*r;
-    printf("the volume is %d",volume);
+    printf("the volume is %lf",volume);
     return 0;
 } // Add a closing brace to fix the missing closing brace error
 
