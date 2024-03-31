@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI and Body Fat Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>BMI and Body Fat Calculator</h1>
+    <label for="weight">Weight (in kilograms):</label>
+    <input type="text" id="weight">
+    <label for="height">Height (in centimeters):</label>
+    <input type="text" id="height">
+    <label for="age">Age:</label>
+    <input type="text" id="age">
+    <label for="gender">Gender (male/female):</label>
+    <input type="text" id="gender">
+    <button onclick="calculate()">Calculate</button>
+    
+    <h2>Results:</h2>
+    <p id="bmiResult"></p>
+    <p id="bmiInterpretation"></p>
+    <p id="bodyFatResult"></p>
+
+    <script>
+        function calculateBMI(weight, height) {
+            // Convert height to meters
+            height = height / 100; // Assuming height is in centimeters, convert it to meters
+            // Calculate BMI
+            var bmi = weight / (height * height);
+            // Round BMI to two decimal places
+            return bmi.toFixed(2);
+        }
+
+        function interpretBMI(bmi) {
+            if (bmi < 18.5) {
+                return "Underweight";
+            } else if (bmi >= 18.5 && bmi < 25) {
+                return "Normal weight";
+            } else if (bmi >= 25 && bmi < 30) {
+                return "Overweight";
+            } else {
+                return "Obese";
+            }
+        }
+
+        function calculateBodyFat(weight, height, age, gender) {
+            // Calculate body fat percentage based on weight, height, age, and gender
+            var bmi = calculateBMI(weight, height);
+            var genderFactor = gender === 'male' ? 1 : 0;
+            var bodyFatPercentage = (1.20 * parseFloat(bmi)) + (0.23 * age) - (10.8 * genderFactor) - 5.4;
+            return bodyFatPercentage.toFixed(2);
+        }
+
+        function calculate() {
+            var weight = parseFloat(document.getElementById("weight").value);
+            var height = parseFloat(document.getElementById("height").value);
+            var age = parseInt(document.getElementById("age").value);
+            var gender = document.getElementById("gender").value.toLowerCase();
+
+            var bmi = calculateBMI(weight, height);
+            var interpretation = interpretBMI(bmi);
+
+            var bodyFatPercentage = calculateBodyFat(weight, height, age, gender);
+
+            document.getElementById("bmiResult").textContent = "Your BMI is: " + bmi;
+            document.getElementById("bmiInterpretation").textContent = "Interpretation: " + interpretation;
+            document.getElementById("bodyFatResult").textContent = "Your body fat percentage is: " + bodyFatPercentage + "%";
+        }
+    </script>
+</body>
+</html>
