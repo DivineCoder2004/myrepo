@@ -1,36 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="body.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI and Body Fat Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"] {
-            width: 100px;
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>BMI and Body Fat Calculator by amal krishna</title>
 </head>
 <body>
-    <h1>BMI and Body Fat Calculator</h1>
+    <h1>BMI and Body Fat Calculator by amal krishna</h1>
     <label for="weight">Weight (in kilograms):</label>
     <input type="text" id="weight">
     <label for="height">Height (in centimeters):</label>
@@ -45,6 +22,8 @@
     <p id="bmiResult"></p>
     <p id="bmiInterpretation"></p>
     <p id="bodyFatResult"></p>
+    <p id="idealWeight"></p>
+    <p id="idealBodyFat"></p>
 
     <script>
         function calculateBMI(weight, height) {
@@ -76,6 +55,28 @@
             return bodyFatPercentage.toFixed(2);
         }
 
+        function calculateIdealWeight(height, gender) {
+            // Calculate ideal weight based on height and gender
+            var idealWeight;
+            if (gender === 'male') {
+                idealWeight = (height - 100) - ((height - 150) / 4);
+            } else {
+                idealWeight = (height - 100) - ((height - 150) / 2.5);
+            }
+            return idealWeight.toFixed(2);
+        }
+
+        function calculateIdealBodyFat(idealWeight, gender) {
+            // Calculate ideal body fat percentage based on ideal weight and gender
+            var idealBodyFat;
+            if (gender === 'male') {
+                idealBodyFat = 15;
+            } else {
+                idealBodyFat = 25;
+            }
+            return idealBodyFat.toFixed(2);
+        }
+
         function calculate() {
             var weight = parseFloat(document.getElementById("weight").value);
             var height = parseFloat(document.getElementById("height").value);
@@ -86,10 +87,14 @@
             var interpretation = interpretBMI(bmi);
 
             var bodyFatPercentage = calculateBodyFat(weight, height, age, gender);
+            var idealWeight = calculateIdealWeight(height, gender);
+            var idealBodyFat = calculateIdealBodyFat(idealWeight, gender);
 
             document.getElementById("bmiResult").textContent = "Your BMI is: " + bmi;
             document.getElementById("bmiInterpretation").textContent = "Interpretation: " + interpretation;
             document.getElementById("bodyFatResult").textContent = "Your body fat percentage is: " + bodyFatPercentage + "%";
+            document.getElementById("idealWeight").textContent = "Your ideal weight is: " + idealWeight + " kg";
+            document.getElementById("idealBodyFat").textContent = "Your ideal body fat percentage is: " + idealBodyFat + "%";
         }
     </script>
 </body>

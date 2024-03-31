@@ -27,6 +27,28 @@ function calculateBodyFat(weight, height, age, gender) {
     return bodyFatPercentage.toFixed(2);
 }
 
+function calculateIdealWeight(height, gender) {
+    // Calculate ideal weight based on height and gender
+    var idealWeight;
+    if (gender === 'male') {
+        idealWeight = 50 + 2.3 * ((height / 2.54) - 60);
+    } else {
+        idealWeight = 45.5 + 2.3 * ((height / 2.54) - 60);
+    }
+    return idealWeight.toFixed(2);
+}
+
+function calculateIdealBodyFatPercentage(gender) {
+    // Calculate ideal body fat percentage based on gender
+    var idealBodyFatPercentage;
+    if (gender === 'male') {
+        idealBodyFatPercentage = 15;
+    } else {
+        idealBodyFatPercentage = 25;
+    }
+    return idealBodyFatPercentage.toFixed(2);
+}
+
 // Example usage
 var weight = parseFloat(prompt("Enter your weight (in kilograms):"));
 var height = parseFloat(prompt("Enter your height (in centimeters):"));
@@ -37,7 +59,11 @@ var bmi = calculateBMI(weight, height);
 var interpretation = interpretBMI(bmi);
 
 var bodyFatPercentage = calculateBodyFat(weight, height, age, gender);
+var idealWeight = calculateIdealWeight(height, gender);
+var idealBodyFatPercentage = calculateIdealBodyFatPercentage(gender);
 
 console.log("Your BMI is: " + bmi);
 console.log("Interpretation: " + interpretation);
 console.log("Your body fat percentage is: " + bodyFatPercentage + "%");
+console.log("Your ideal weight is: " + idealWeight + " kg");
+console.log("Your ideal body fat percentage is: " + idealBodyFatPercentage + "%");
