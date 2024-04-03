@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMI and Body Fat Calculator by amal krishna</title>
 </head>
+<style>
+.btn{
+    background-color: black;
+    color:white;
+    font-size: 20;
+    padding: 5px;
+}
+</style>
 <body>
     <h1>BMI and Body Fat Calculator by amal krishna</h1>
     <label for="weight">Weight (in kilograms):</label>
@@ -16,7 +24,7 @@
     <input type="text" id="age">
     <label for="gender">Gender (male/female):</label>
     <input type="text" id="gender">
-    <button onclick="calculate()">Calculate</button>
+    <button  class="btn" onclick="calculate()">Calculate</button>
     
     <h2>Results:</h2>
     <p id="bmiResult"></p>
