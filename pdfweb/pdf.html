@@ -1,0 +1,28 @@
+<!-- FILEPATH: /c:/Microsoft VS Code/code s2/myrepo/pdfweb/pdf.html -->
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>PDF to PPT Converter</title>
+    <script src="https://unpkg.com/pdf2pptx"></script>
+    <link rel="stylesheet" type="text/css" href="pdf.css" />
+</head>
+
+<body>
+    <script>
+        function convertPdfToPpt(pdfPath, pptPath) {
+            var converter = new pdf2pptx.Converter(pdfPath);
+            converter.convert(pptPath);
+            converter.close();
+        }
+
+        // Usage
+        var pdfFile = '/path/to/input.pdf';
+        var pptFile = '/path/to/output.pptx';
+
+        convertPdfToPpt(pdfFile, pptFile);
+    </script>
+</body>
+</html>
+<button onclick="convertPdfToPpt()">Choose File</button>
+
